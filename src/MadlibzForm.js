@@ -1,21 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function MadlibzForm(props) {
-  let index = 0;
-  let [word, setWord] = useState('');
-  let [wordType, setWordType] = useState(props.blanks.current[index]);
+import CompletedLib from './CompletedLib';
 
-  console.log(props);
-  // let currentBlanks = props.blanks.current;
-  let currentBlanksObj = useRef([]);
+export default function MadlibzForm(props) {
+  let wordsArr = useRef([]);
+
+  let [word, setWord] = useState('');
+  let [index, setIndex] = useState(0);
+  let [type, setType] = useState(`${props.blanks[index]}`);
+  let [showLib, setShowLib] = useState(false);
+
   useEffect(() => {
-    currentBlanksObj.current = props.blanks.current;
+    setType(props.blanks[index]);
   });
 
-  let currentBlanks = currentBlanksObj.current;
-  console.log('sdfasdfsdfasdf', currentBlanks);
+  const clickHandler = () => {
+    setIndex(index + 1);
+    setType(props.blanks[index]);
+    wordsArr.current.push(word);
+    setWord('');
+    console.log('wordsArr', wordsArr);
+  };
 
-  let newWords = [];
+  const renderLib = () => {
+    setShowLib(!showLib);
+  };
 
   /*
   - create an index variable to store the current
@@ -26,31 +35,58 @@ export default function MadlibzForm(props) {
   - do this in a while loop where index !== currentBlanks.length
   */
 
-  const clickHandler = (word) => {
-    if (index !== currentBlanks.length) {
-      newWords.push(word);
-      setWord('');
-      index++;
-      setWordType();
-    }
-    console.log('new words', newWords);
-  };
-
+  console.log(props.blanks);
+  console.log(wordsArr);
   return (
     <div>
-      <h1>{wordType}</h1>
+      {showLib === false ? (
+        <div>
+          {index !== props.blanks.length ? (
+            <div>
+              <h1>Input the a word that fits the description!</h1>
+              <h2>
+                Word {index + 1} of {props.blanks.length}
+              </h2>
+              <h2>{type}</h2>
 
-      <input
-        type="text"
-        value={word}
-        onChange={(evt) => {
-          setWord(evt.target.value);
-          console.log('word', word);
-        }}
-      ></input>
-      <button type="button" onClick={() => clickHandler(word)}>
-        Next Word
-      </button>
+              <input
+                type="text"
+                value={word}
+                onChange={(evt) => {
+                  setWord(evt.target.value);
+                }}
+              ></input>
+              <button type="button" onClick={() => clickHandler()}>
+                Next Word
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  renderLib();
+                }}
+              >
+                See Madlib!
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>
+          {index === props.blanks.length && showLib === true ? (
+            <div>
+              <CompletedLib />
+              <button type="button" onClick={() => renderLib()}>
+                Go Back
+              </button>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

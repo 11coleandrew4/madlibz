@@ -1,0 +1,60 @@
+.title-container {
+  background-color: transparent;
+}
+
+.title-wrapper {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 4rem;
+  max-width: 80rem;
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.title-box {
+  text-align: center;
+}
+
+.title-header {
+  color: #4f46e5;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.title-main {
+  margin-top: 0.25rem;
+  color: #111827;
+  font-size: 3rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+
+  @media (min-width: 640px) {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+.title-subtext {
+  margin-top: 1.25rem;
+  color: #6b7280;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  /* max-width: 36rem; */
+}

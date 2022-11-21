@@ -6,7 +6,8 @@
 
 .text-field {
   display: block;
-  width: 100%;
+  width: 30%;
+  max-width: 33%;
   border-radius: 0.375rem;
   border-color: #d1d5db;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

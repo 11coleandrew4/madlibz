@@ -38,9 +38,9 @@ function App() {
 
   return (
     <div id="app-container">
-      <h1>Madlibz</h1>
+      {/* <Title /> */}
       <MadlibzForm blanks={blanksState} value={valueState} title={titleState} />
-      <button type="button" onClick={() => refreshPage()}>
+      <button className="button" type="button" onClick={() => refreshPage()}>
         Restart
       </button>
     </div>

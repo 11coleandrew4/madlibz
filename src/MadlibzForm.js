@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './MadlibzForm.css';
+import './Title.css';
 import CompletedLib from './CompletedLib';
 
 export default function MadlibzForm(props) {
@@ -9,6 +10,7 @@ export default function MadlibzForm(props) {
   let [index, setIndex] = useState(0);
   let [type, setType] = useState(`${props.blanks[index]}`);
   let [showLib, setShowLib] = useState(false);
+  let [subText, setSubText] = useState(true);
 
   useEffect(() => {
     setType(props.blanks[index]);
@@ -23,15 +25,29 @@ export default function MadlibzForm(props) {
 
   const renderLib = () => {
     setShowLib(!showLib);
+    setSubText(!subText);
   };
 
   return (
     <div>
+      <div className="title-container">
+        <div className="title-wrapper">
+          <div className="title-box">
+            <h2 className="title-header">MadLibz</h2>
+            <p className="title-main">The game of middle school nostalgia</p>
+            {subText && (
+              <p className="title-subtext">
+                Enter a word into the textbox below that grammaticaly aligns
+                with the required word.
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
       {showLib === false ? (
         <div>
           {index !== props.blanks.length ? (
             <div className="form-container">
-              <h1>Input the a word that fits the description!</h1>
               <h2>
                 Word {index + 1} of {props.blanks.length}
               </h2>
@@ -45,13 +61,18 @@ export default function MadlibzForm(props) {
                   setWord(evt.target.value);
                 }}
               ></input>
-              <button type="button" onClick={() => clickHandler()}>
+              <button
+                className="button"
+                type="button"
+                onClick={() => clickHandler()}
+              >
                 Next
               </button>
             </div>
           ) : (
             <div className="form-container">
               <button
+                className="button"
                 type="button"
                 onClick={() => {
                   renderLib();
@@ -71,7 +92,6 @@ export default function MadlibzForm(props) {
                 title={props.title}
                 userWords={wordsArr.current}
               />
-              <h2>Refresh Page To Do Another One!</h2>
             </div>
           ) : (
             <div></div>

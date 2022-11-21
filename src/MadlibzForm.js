@@ -17,9 +17,8 @@ export default function MadlibzForm(props) {
   const clickHandler = () => {
     setIndex(index + 1);
     setType(props.blanks[index]);
-    wordsArr.current.push(word);
+    wordsArr.current.push(word.toUpperCase());
     setWord('');
-    console.log('wordsArr', wordsArr);
   };
 
   const renderLib = () => {
@@ -35,8 +34,6 @@ export default function MadlibzForm(props) {
   - do this in a while loop where index !== currentBlanks.length
   */
 
-  console.log(props.blanks);
-  console.log(wordsArr);
   return (
     <div>
       {showLib === false ? (
@@ -57,7 +54,7 @@ export default function MadlibzForm(props) {
                 }}
               ></input>
               <button type="button" onClick={() => clickHandler()}>
-                Next Word
+                Next
               </button>
             </div>
           ) : (
@@ -77,10 +74,12 @@ export default function MadlibzForm(props) {
         <div>
           {index === props.blanks.length && showLib === true ? (
             <div>
-              <CompletedLib />
-              <button type="button" onClick={() => renderLib()}>
-                Go Back
-              </button>
+              <CompletedLib
+                value={props.value}
+                title={props.title}
+                userWords={wordsArr.current}
+              />
+              <h2>Refresh Page To Do Another One!</h2>
             </div>
           ) : (
             <div></div>

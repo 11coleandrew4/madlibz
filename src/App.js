@@ -31,7 +31,7 @@ function App() {
   return (
     <div id="app-container">
       <h1>TEST</h1>
-      <MadlibzForm blanks={blanksState} />
+      <MadlibzForm blanks={blanksState} value={valueState} title={titleState} />
     </div>
   );
 }

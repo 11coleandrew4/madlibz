@@ -12,7 +12,7 @@ function App() {
   let value = useRef([]);
   let title = useRef('');
 
-  useEffect(() => {
+  const fetchMadlibz = () => {
     axios
       .get('http://madlibz.herokuapp.com/api/random?minlength=5&maxlength=25')
       .then((res) => {
@@ -26,12 +26,23 @@ function App() {
       .catch((err) => {
         console.log(`ERROR: ${err}`);
       }, []);
+  };
+
+  useEffect(() => {
+    fetchMadlibz();
   }, []);
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
 
   return (
     <div id="app-container">
-      <h1>TEST</h1>
+      <h1>Madlibz</h1>
       <MadlibzForm blanks={blanksState} value={valueState} title={titleState} />
+      <button type="button" onClick={() => refreshPage()}>
+        Restart
+      </button>
     </div>
   );
 }
